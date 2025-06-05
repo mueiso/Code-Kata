@@ -1,12 +1,13 @@
 class Solution {
     public int[][] solution(int[] num_list, int n) {
-        int row = num_list.length / n;
-        int[][] answer = new int[row][n];
+        int[][] answer = {};
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < n; j++) {
-                answer[i][j] = num_list[i * n + j];
-            }
+        int length = num_list.length;
+
+        answer = new int[length/n][n];
+
+        for(int i=0; i<length; i++){
+            answer[i/n][i%n]=num_list[i];
         }
 
         return answer;
