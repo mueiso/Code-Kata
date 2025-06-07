@@ -1,21 +1,15 @@
 class Solution {
     public String solution(String[] id_pw, String[][] db) {
-        String inputId = id_pw[0];
-        String inputPw = id_pw[1];
+        String answer = "";
 
-        for (String[] user : db) {
-            String dbId = user[0];
-            String dbPw = user[1];
-
-            if (inputId.equals(dbId)) {
-                if (inputPw.equals(dbPw)) {
+        for(int i = 0; i < db.length; i++){
+            if(db[i][0].equals(id_pw[0])){
+                if(db[i][1].equals(id_pw[1])){
                     return "login";
-                } else {
-                    return "wrong pw";
                 }
+                return "wrong pw";
             }
         }
-
         return "fail";
     }
 }
