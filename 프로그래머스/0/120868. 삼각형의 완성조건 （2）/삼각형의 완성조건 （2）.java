@@ -1,12 +1,11 @@
 class Solution {
     public int solution(int[] sides) {
-        int a = sides[0];
-        int b = sides[1];
+        int answer = 0;
+        int max = Math.max(sides[0], sides[1]);
+        int min = Math.min(sides[0], sides[1]);
 
-        int min = Math.abs(a - b);
-        int max = a + b;
+        answer += min * 2 - 1;
 
-        // x는 (min, max) 사이의 정수
-        return max - min - 1;
+        return answer;
     }
 }
