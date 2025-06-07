@@ -1,24 +1,21 @@
-import java.util.*;
+import java.util.LinkedHashSet;
 
 class Solution {
     public int[] solution(int n) {
-        Set<Integer> primeFactors = new TreeSet<>(); // 자동 정렬 + 중복 제거
-        
-        int num = n;
-        for (int i = 2; i <= num; i++) {
-            while (num % i == 0) {
-                primeFactors.add(i);
-                num /= i;
+        LinkedHashSet<Integer> primeNumbers = new LinkedHashSet<>();
+
+        int i = 2;
+        while (n != 0 && i <= n) {
+            if (n % i == 0) {
+                primeNumbers.add(i);
+                n /= i;
+            } else {
+                i++;
             }
         }
-        
-        // Set을 배열로 변환
-        int[] answer = new int[primeFactors.size()];
-        int idx = 0;
-        for (int factor : primeFactors) {
-            answer[idx++] = factor;
-        }
-        
-        return answer;
+
+        // System.out.println(primeNumbers);
+
+        return primeNumbers.stream().mapToInt(Integer::intValue).toArray();
     }
 }
