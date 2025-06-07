@@ -4,22 +4,19 @@ class Solution {
     public int solution(String s) {
         int answer = 0;
         Stack<Integer> stack = new Stack<>();
-        String[] arr = s.split(" ");
-        
-        for (String str : arr) {
-            if (str.equals("Z")) {
+
+        for (String token : s.split(" ")) {
+            if (token.equals("Z")) {
                 if (!stack.isEmpty()) {
-                    stack.pop();
+                    answer -= stack.pop();
                 }
             } else {
-                stack.push(Integer.parseInt(str));
+                int num = Integer.parseInt(token);
+                stack.push(num);
+                answer += num;
             }
         }
-        
-        while (!stack.isEmpty()) {
-            answer += stack.pop();
-        }
-        
+
         return answer;
     }
 }
