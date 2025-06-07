@@ -1,14 +1,15 @@
 class Solution {
     public int solution(int n) {
-        int i = 1;
-        int factorial = 1;
+        int fac = 1;
+        int i = 0;
 
-        while (true) {
-            factorial *= i;
-            if (factorial > n) {
-                return i - 1;
-            }
-            i++;
+        while(true){
+            if(fac <= n){
+                fac *= i + 1;
+                i++;
+            }else break;
         }
+
+        return i-1;
     }
 }
