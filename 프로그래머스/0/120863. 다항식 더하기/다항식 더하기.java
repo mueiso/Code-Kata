@@ -1,28 +1,15 @@
 class Solution {
     public String solution(String polynomial) {
-        String[] terms = polynomial.split(" \\+ ");
         int xCount = 0;
-        int constant = 0;
+        int num = 0;
 
-        for (String term : terms) {
-            if (term.contains("x")) {
-                String coef = term.replace("x", "");
-                xCount += coef.equals("") ? 1 : Integer.parseInt(coef);
-            } else {
-                constant += Integer.parseInt(term);
+        for (String s : polynomial.split(" ")) {
+            if (s.contains("x")) {
+                xCount += s.equals("x") ? 1 : Integer.parseInt(s.replaceAll("x", ""));
+            } else if (!s.equals("+")) {
+                num += Integer.parseInt(s);
             }
         }
-
-        // 결과 조합
-        StringBuilder sb = new StringBuilder();
-        if (xCount > 0) {
-            sb.append(xCount == 1 ? "x" : xCount + "x");
-        }
-        if (constant > 0) {
-            if (xCount > 0) sb.append(" + ");
-            sb.append(constant);
-        }
-
-        return sb.toString();
+        return (xCount != 0 ? xCount > 1 ? xCount + "x" : "x" : "") + (num != 0 ? (xCount != 0 ? " + " : "") + num : xCount == 0 ? "0" : "");
     }
 }
