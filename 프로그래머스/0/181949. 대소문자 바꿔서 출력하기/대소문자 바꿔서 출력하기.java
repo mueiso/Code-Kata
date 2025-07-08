@@ -1,22 +1,23 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str = sc.next();
-        
-        StringBuilder sb = new StringBuilder();
+        String a = sc.next();
+        String answer = "";
 
-        for (char c : str.toCharArray()) {
-            if (Character.isUpperCase(c)) {
-                sb.append(Character.toLowerCase(c));
-            } else if (Character.isLowerCase(c)) {
-                sb.append(Character.toUpperCase(c));
-            } else {
-                sb.append(c); // 알파벳이 아닌 경우는 그대로
+        //Stack <Character> stack = new Stack <> ();
+
+        for(Character c : a.toCharArray()){
+            if(Character.isUpperCase(c)){
+                //stack.push(Character.toLowerCase(c));
+                answer += Character.toLowerCase(c);
             }
-        }
-
-        System.out.println(sb.toString());
+            else if(Character.isLowerCase(c)){
+                //stack.push(Character.toUpperCase(c));
+                answer += Character.toUpperCase(c);
+            }
+        } 
+        System.out.println(answer);
     }
 }
