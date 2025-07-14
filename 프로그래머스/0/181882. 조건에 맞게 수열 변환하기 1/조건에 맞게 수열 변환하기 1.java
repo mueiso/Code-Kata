@@ -1,19 +1,11 @@
+import java.util.*;
+
 class Solution {
     public int[] solution(int[] arr) {
         
-        int[] answer = new int[arr.length];
-
-        for (int i = 0; i < arr.length; i++) {
-            int num = arr[i];
-            if (num >= 50 && num % 2 == 0) {
-                answer[i] = num / 2;
-            } else if (num < 50 && num % 2 == 1) {
-                answer[i] = num * 2;
-            } else {
-                answer[i] = num;
-            }
-        }
-
-        return answer;
+        return Arrays.stream(arr).map(operand -> operand >= 50
+                                      && operand % 2 == 0 ? operand / 2 : operand < 50
+                                      && operand % 2 == 1 ? operand * 2 : operand)
+            .toArray();
     }
 }
