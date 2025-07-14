@@ -1,21 +1,16 @@
+import java.util.Map;
+import java.util.function.BiFunction;
+
 class Solution {
     public int solution(String ineq, String eq, int n, int m) {
         
-        if (ineq.equals(">") && eq.equals("=")) {
-            
-            return n >= m ? 1 : 0;
-        } else if (ineq.equals("<") && eq.equals("=")) {
-            
-            return n <= m ? 1 : 0;
-        } else if (ineq.equals(">") && eq.equals("!")) {
-            
-            return n > m ? 1 : 0;
-        } else if (ineq.equals("<") && eq.equals("!")) {
-            
-            return n < m ? 1 : 0;
-        } else {
-            
-            return 0; // 잘못된 입력일 경우 대비
-        }
+        Map<String, BiFunction<Integer, Integer, Boolean>> functions = Map.of(
+                ">=", (a, b) -> a >= b,
+                "<=", (a, b) -> a <= b,
+                ">!", (a, b) -> a > b,
+                "<!", (a, b) -> a < b
+        );
+
+        return functions.get(ineq + eq).apply(n, m) ? 1 : 0;
     }
 }
