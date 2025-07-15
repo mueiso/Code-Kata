@@ -2,16 +2,28 @@ class Solution {
     
     public int solution(int a, int b, int c) {
         
-        int sum1 = a + b + c;
-        int sum2 = a * a + b * b + c * c;
-        int sum3 = a * a * a + b * b * b + c * c * c;
-
-        if (a == b && b == c) {
-            return sum1 * sum2 * sum3;
-        } else if (a == b || a == c || b == c) {
-            return sum1 * sum2;
-        } else {
-            return sum1;
+        int answer = 1;
+        int count = 1;
+        
+        if(a == b || a == c || b == c) {
+            count++;
         }
+
+        if(a == b && b == c) {
+            count++;
+        }
+
+        for(int i = 1; i <= count; i++) {
+            answer *= (pow(a,i)+pow(b,i)+pow(c,i));
+        }
+
+        return answer;
+    }
+
+    private int pow(int a, int b) {
+        
+        if(b == 0) return 1;
+        
+        return a * pow(a, b-1);
     }
 }
