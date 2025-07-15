@@ -2,20 +2,21 @@ class Solution {
     
     public int solution(int[] num_list) {
         
-        StringBuilder odd = new StringBuilder();
-        StringBuilder even = new StringBuilder();
+        int answer = 0;
+        int even = 0;
+        int odd = 0;
 
-        for (int num : num_list) {
-            if (num % 2 == 0) {
-                even.append(num);
+        for(int num : num_list) {
+            if(num % 2 == 0) {
+                even *= 10;
+                even += num;
             } else {
-                odd.append(num);
+                odd *= 10;
+                odd += num;
             }
         }
+        answer = even + odd;
 
-        int oddNum = odd.length() == 0 ? 0 : Integer.parseInt(odd.toString());
-        int evenNum = even.length() == 0 ? 0 : Integer.parseInt(even.toString());
-
-        return oddNum + evenNum;
+        return answer;
     }
 }
