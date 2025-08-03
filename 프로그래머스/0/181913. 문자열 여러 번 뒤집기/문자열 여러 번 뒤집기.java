@@ -1,25 +1,31 @@
 class Solution {
-    
+
+    // 클래스 전역으로 사용할 문자 배열 선언
+    char[] arr;
+
     public String solution(String my_string, int[][] queries) {
-        
-        // StringBuilder는 문자열을 수정할 수 있는 클래스이므로, 문자열 뒤집기 작업에 적합
-        StringBuilder sb = new StringBuilder(my_string);
 
-        // queries 배열의 각 명령을 순서대로 처리
+        // 입력 문자열을 문자 배열로 변환 (문자열은 불변이므로 배열로 바꾸면 수정이 쉬움)
+        arr = my_string.toCharArray();
+
+        // 주어진 쿼리 목록을 순차적으로 처리
         for (int[] query : queries) {
-            int s = query[0]; // 시작 인덱스
-            int e = query[1]; // 끝 인덱스
-
-            // 부분 문자열을 뒤집기 위해, 현재 구간의 문자열을 추출 후 reverse
-            String reversed = new StringBuilder(sb.substring(s, e + 1)).reverse().toString();
-
-            // 뒤집은 문자열을 원래 위치에 다시 삽입
-            for (int i = 0; i < reversed.length(); i++) {
-                sb.setCharAt(s + i, reversed.charAt(i));
-            }
+            // 각 쿼리는 [s, e] 형태로, s부터 e까지의 문자열을 뒤집는 작업
+            reverse(query[0], query[1]);
         }
 
-        // 최종 결과 문자열 반환
-        return sb.toString();
+        // 수정된 문자 배열을 문자열로 다시 변환하여 반환
+        return new String(arr);
+    }
+
+    // s부터 e까지의 구간을 뒤집는 메서드
+    private void reverse(int s, int e) {
+        // s가 e보다 작을 동안 두 포인터를 이용해 문자를 교환
+        while (s < e) {
+            // 두 문자의 위치를 교환
+            char temp = arr[s];
+            arr[s++] = arr[e];
+            arr[e--] = temp;
+        }
     }
 }
