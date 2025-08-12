@@ -1,34 +1,26 @@
 class Solution {
-    
+
     public String solution(String my_string, int m, int c) {
         
+        // 결과 문자열을 저장할 변수
+        String answer = "";
+
         /*
-         * 문자열을 char 배열로 변환
-         * → charAt() 호출 없이 인덱스로 바로 접근 가능
-         * → 아주 큰 문자열에서는 미세하게 성능 향상 가능
-         */
-        char[] chars = my_string.toCharArray();
-        
-        /*
-         * StringBuilder: 문자열 결합 성능 최적화
-         */
-        StringBuilder sb = new StringBuilder();
-        
-        /*
-         * m: 한 줄에 들어가는 글자 수
-         * c: 읽고 싶은 열 번호 (1부터 시작)
+         * m : 한 줄에 들어가는 글자 수
+         * c : 선택할 열 번호 (1부터 시작)
          * 
-         * char 배열의 인덱스:
-         * 첫 번째 읽을 위치는 c-1 (0-based index)
-         * 다음 읽을 위치는 (c-1) + m, 그 다음은 (c-1) + 2*m, ...
-         * 
-         * 즉, i = c - 1; i < chars.length; i += m
+         * i = c - 1 → 배열 인덱스는 0부터 시작하므로 -1 해줌
+         * 이후 m씩 건너뛰면서 해당 위치의 문자 선택
          */
-        for (int i = c - 1; i < chars.length; i += m) {
-            sb.append(chars[i]); // 해당 열의 문자 추가
+        for (int i = c - 1; i < my_string.length(); i += m) {
+            /*
+             * i번째 문자를 answer에 이어 붙임
+             * 문자열 + 연산은 매번 새로운 String 객체를 생성하므로 매우 긴 문자열의 경우 비효율적일 수 있음
+             */
+            answer += my_string.charAt(i);
         }
         
         // 완성된 문자열 반환
-        return sb.toString();
+        return answer;
     }
 }
