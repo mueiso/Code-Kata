@@ -1,15 +1,10 @@
+import java.util.Arrays;
+
 class Solution {
     
     public int[] solution(int[] num_list, int n) {
         
-        // n개의 원소를 저장할 배열 생성
-        int[] answer = new int[n];
-        
-        for (int i = 0; i < n; i++) {
-            // 앞에서부터 n개 복사
-            answer[i] = num_list[i];
-        }
-        
-        return answer;
+        // 0 이상 n 미만 구간 복사
+        return Arrays.copyOfRange(num_list, 0, n);
     }
 }
