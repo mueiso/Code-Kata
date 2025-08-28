@@ -1,24 +1,21 @@
-import java.util.*;
-
 class Solution {
     
     public String[] solution(String[] todo_list, boolean[] finished) {
         
-        // 아직 마치지 못한 일을 담을 리스트
-        List<String> notFinished = new ArrayList<>();
+        // 아직 끝내지 못한 할 일들을 임시로 저장할 문자열
+        String str = "";
         
-        // todo_list와 finished를 같은 인덱스로 순회
-        for (int i = 0; i < todo_list.length; i++) {
-            
-            // 완료되지 않은 경우
-            if (!finished[i]) {
-                notFinished.add(todo_list[i]);
-            }
+        // finished 배열을 순회하면서
+        for(int i = 0; i < finished.length; i++) {
+
+            /*
+             * 만약 해당 일이 끝나지 않았다면 (finished[i] == false)
+             * str에 todo_list[i]를 추가하고, 뒤에 구분자 ","를 붙인다
+             */
+            str = finished[i] == false ? str + todo_list[i] + "," : str;
         }
-        
-        // List -> 배열로 변환
-        String[] answer = notFinished.toArray(new String[0]);
-        
-        return answer;
+
+        // 구분자 "," 기준으로 나눠 문자열 배열로 반환
+        return str.split(",");
     }
 }
