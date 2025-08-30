@@ -1,44 +1,37 @@
+import java.util.Arrays;
+
 class Solution {
     
     public int solution(int[] arr) {
         
-        int x = 0; // 몇 번 반복했는지 기록하는 변수
-
-        while (true) {
-            
-            // 현재 배열을 복사해둠 (이전 상태 비교용)
-            int[] prev = arr.clone();
-
-            // 규칙에 맞게 arr 변환
-            for (int i = 0; i < arr.length; i++) {
-                
-                if (arr[i] >= 50 && arr[i] % 2 == 0) {
-                    arr[i] /= 2;  // 50 이상 & 짝수 → 2로 나눔
-                } else if (arr[i] < 50 && arr[i] % 2 == 1) {
-                    arr[i] = arr[i] * 2 + 1; // 50 미만 & 홀수 → 2배 + 1
-                }
-            }
-
-            // 변화가 없으면(arr(x) == arr(x+1)) 종료
-            if (isSame(prev, arr)) {
-                break;
-            }
-
-            x++; // 아직 변화가 있으면 횟수 증가 후 반복
-        }
-
-        return x;
+        // 각 원소가 안정화되기까지 걸리는 연산 횟수를 구한 뒤, 그 중 최댓값 반환
+        return Arrays.stream(arr)
+                     .map(this::cntAction)
+                     .max()
+                     .getAsInt();
     }
 
-    // 두 배열이 같은지 비교하는 메서드
-    private boolean isSame(int[] a, int[] b) {
-        
-        if (a.length != b.length) return false;
+    // 특정 숫자 n이 더 이상 변하지 않을 때까지 몇 번의 연산이 필요한지 계산
+    private int cntAction(int n) {
+        int cnt = 0;
 
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] != b[i]) return false;
+        while (true) {
+            // 조건 1: 짝수이면서 50 이상인 경우 → 2로 나눔
+            if (n % 2 == 0 && n >= 50) {
+                n /= 2;
+                cnt++;
+            }
+            // 조건 2: 홀수이면서 50 미만인 경우 → 2배 후 1을 더함
+            else if (n % 2 == 1 && n < 50) {
+                n = n * 2 + 1;
+                cnt++;
+            }
+            // 위 두 조건에 모두 해당하지 않으면 안정화된 상태 → 종료
+            else {
+                break;
+            }
         }
 
-        return true;
+        return cnt;
     }
 }
