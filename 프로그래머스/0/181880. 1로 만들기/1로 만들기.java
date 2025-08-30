@@ -1,23 +1,21 @@
+import java.util.Arrays;
+
 class Solution {
     
     public int solution(int[] num_list) {
         
-        int answer = 0;
-
-        for (int n : num_list) {
-            // 각 원소 n을 1로 만들 때까지 반복
-            while (n > 1) {
-                if (n % 2 == 0) {
-                    // 짝수라면 2로 나눔
-                    n /= 2;
-                } else {
-                    // 홀수라면 1 빼고 2로 나눔
-                    n = (n - 1) / 2;
-                }
-                answer++; // 연산 횟수 증가
-            }
-        }
-
-        return answer;
+        /*
+         * Arrays.stream(num_list) → 배열을 스트림으로 변환
+         
+         * .map(i -> Integer.toBinaryString(i).length() - 1)
+            - 정수를 2진수 문자열로 변환 (예: 10 -> "1010")
+            - 2진수의 자릿수 - 1 = 1이 될 때까지 필요한 나누기 연산 횟수
+            (예: "1010".length() = 4 → 3번의 연산 필요)
+            
+         * .sum() → 모든 원소의 연산 횟수를 합산
+         */
+        return Arrays.stream(num_list)
+                     .map(i -> Integer.toBinaryString(i).length() - 1)
+                     .sum();
     }
 }
