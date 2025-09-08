@@ -2,14 +2,21 @@ class Solution {
     
     public int solution(String myString, String pat) {
         
-        int count = 0;        // pat이 등장한 횟수
-        int idx = 0;          // 탐색 시작 위치
+        int cnt = 0; // pat이 등장하는 횟수를 저장할 변수
 
-        while ((idx = myString.indexOf(pat, idx)) != -1) {
-            count++;          // 발견 시 횟수 증가
-            idx++;            // 다음 탐색은 겹쳐 있는 경우도 포함해야 하므로 한 칸 뒤에서 시작
+        // 문자열 myString의 모든 위치를 순회
+        for (int i = 0; i < myString.length(); i++) {
+
+            /*
+             * i번째 인덱스부터 끝까지 잘라낸 문자열이 pat으로 시작하는지 확인
+             * 즉, myString[i..]가 pat으로 시작하면 pat이 발견된 것
+             */
+            if (myString.substring(i).startsWith(pat)) {
+                cnt++; // 발견했으므로 카운트 증가
+            }
         }
 
-        return count;
+        // pat이 발견된 총 횟수를 반환
+        return cnt;
     }
 }
