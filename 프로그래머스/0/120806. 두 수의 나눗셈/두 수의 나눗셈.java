@@ -1,9 +1,9 @@
-public class Solution {
+class Solution {
     
     public int solution(int num1, int num2) {
         
-        int answer = (int)(num1 / (double)num2 * 1000);
+        int answer = 0;
         
-        return answer;
+        return num1 * 1000 / num2;
     }
 }
