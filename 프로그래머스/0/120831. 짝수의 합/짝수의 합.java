@@ -9,6 +9,7 @@ public class Solution {
             sum += i;
         }
         
-        return sum;  // 최종 합 반환
+         // 최종 합 반환
+        return sum;
     }
 }
