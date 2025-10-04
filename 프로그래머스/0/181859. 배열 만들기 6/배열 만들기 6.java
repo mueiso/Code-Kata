@@ -13,34 +13,32 @@ class Solution {
     
     public int[] solution(int[] arr) {
         
-        List<Integer> stk = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
 
-        for (int i = 0; i < arr.length; i++) {
-            if (stk.isEmpty()) {
-                // 규칙 1: stk이 비었으면 추가
-                stk.add(arr[i]);
+        for (int value : arr) {
+            if (stack.isEmpty()) {
+                // 규칙 1: 비어 있으면 push
+                stack.push(value);
             } else {
-                int last = stk.get(stk.size() - 1);
-                if (last == arr[i]) {
-                    // 규칙 2: 마지막 원소 == arr[i] → 제거
-                    stk.remove(stk.size() - 1);
+                // 규칙 2: 마지막 값과 비교
+                if (stack.peek() == value) {
+                    stack.pop(); // 같으면 제거
                 } else {
-                    // 규칙 3: 마지막 원소 != arr[i] → 추가
-                    stk.add(arr[i]);
+                    stack.push(value); // 다르면 추가
                 }
             }
         }
 
-        // 최종적으로 비어있으면 [-1] 반환
-        if (stk.isEmpty()) {
+        // 최종적으로 비어 있으면 [-1] 반환
+        if (stack.isEmpty()) {
             return new int[]{-1};
         }
 
-        // List → int[] 변환
-        int[] answer = new int[stk.size()];
+        // Stack → int[]
+        int[] answer = new int[stack.size()];
         
-        for (int i = 0; i < stk.size(); i++) {
-            answer[i] = stk.get(i);
+        for (int i = 0; i < stack.size(); i++) {
+            answer[i] = stack.get(i);
         }
 
         return answer;
