@@ -6,25 +6,27 @@
  * arr1이 크면 1, arr2가 크면 -1, 같으면 0을 반환
  */
 
-import java.util.Arrays;
+import java.util.stream.IntStream;
 
 class Solution {
     
     public int solution(int[] arr1, int[] arr2) {
         
-        // 1. 길이 비교
-        if (arr1.length > arr2.length) {
-            return 1;
-        } else if (arr1.length < arr2.length) {
-            return -1;
+        /*
+         1. 배열 길이 비교
+         * arr1.length > arr2.length → 1 
+         * arr1.length < arr2.length → -1
+         * 같으면 0
+         */
+        int answer = Integer.compare(arr1.length, arr2.length);
+
+        // 2. 길이가 같을 경우 원소 합으로 비교
+        if (answer == 0) {
+            // IntStream.of(arr).sum() → 배열 원소 합 계산
+            answer = Integer.compare(IntStream.of(arr1).sum(), IntStream.of(arr2).sum());
         }
 
-        // 2. 길이가 같다면 합계 비교 (Stream API 활용)
-        int sum1 = Arrays.stream(arr1).sum();
-        int sum2 = Arrays.stream(arr2).sum();
-
-        if (sum1 > sum2) return 1;
-        else if (sum1 < sum2) return -1;
-        else return 0;
+        // 3. arr1이 크면 1, arr2가 크면 -1, 같으면 0
+        return answer;
     }
 }
