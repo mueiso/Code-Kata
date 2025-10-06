@@ -6,6 +6,8 @@
  * arr1이 크면 1, arr2가 크면 -1, 같으면 0을 반환
  */
 
+import java.util.Arrays;
+
 class Solution {
     
     public int solution(int[] arr1, int[] arr2) {
@@ -17,16 +19,12 @@ class Solution {
             return -1;
         }
 
-        // 2. 길이가 같다면 합계 비교
-        int sum1 = 0, sum2 = 0;
-        
-        for (int num : arr1) sum1 += num;
-        for (int num : arr2) sum2 += num;
+        // 2. 길이가 같다면 합계 비교 (Stream API 활용)
+        int sum1 = Arrays.stream(arr1).sum();
+        int sum2 = Arrays.stream(arr2).sum();
 
-        if (sum1 > sum2)
-            return 1;
-        else if (sum1 < sum2)
-            return -1;
+        if (sum1 > sum2) return 1;
+        else if (sum1 < sum2) return -1;
         else return 0;
     }
 }
