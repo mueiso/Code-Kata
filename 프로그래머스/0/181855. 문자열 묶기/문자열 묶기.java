@@ -1,44 +1,41 @@
 /* [문제풀이]
- * countByLen 해시맵을 만들어 문자열 길이별로 개수를 카운팅
-   예: ["a", "bc", "de", "fgh"] → {1=2, 2=2, 3=1}
 
- * 순회할 때마다 getOrDefault(len, 0) + 1로 개수를 증가
+ * 카운팅 배열 준비
+   문자열 길이는 1 이상 30 이하라고 가정할 수 있으므로, 크기가 31인 배열 lengArr를 만듦
+   인덱스 = 문자열 길이, 값 = 해당 길이 문자열 개수
 
- * 동시에 max 값을 갱신해 최댓값을 즉시 저장
-   → 마지막에 따로 최대값을 구할 필요가 없음
+ * 빈도 집계
+   주어진 문자열 배열을 순회하면서 각 문자열 길이를 인덱스로 하는 lengArr 값을 1씩 증가
+   예: ["a", "bc", "de", "fgh"] → lengArr[1]=1, lengArr[2]=2, lengArr[3]=1
 
- * 최종적으로 max를 반환하면 가장 큰 그룹의 크기가 된다
+ * 최댓값 탐색
+   for문으로 lengArr 배열을 순회하면서 가장 큰 값을 찾아 answer에 저장
+   이 값이 곧 가장 많은 그룹의 크기
+
+ * 결과 반환
+   최댓값 answer를 반환
+   
  */
-
-import java.util.*;
 
 class Solution {
     
     public int solution(String[] strArr) {
         
-        // 문자열 길이별 개수를 저장할 Map (key = 문자열 길이, value = 해당 길이의 문자열 개수)
-        Map<Integer, Integer> countByLen = new HashMap<>();
-        
-        // 가장 큰 그룹의 크기를 저장할 변수
-        int max = 0;
+        int answer = 0;
 
-        // 주어진 문자열 배열 순회
-        for (String s : strArr) {
-            int len = s.length(); // 현재 문자열의 길이 구하기
-            
-            // 해당 길이의 기존 개수 가져오고 +1
-            int c = countByLen.getOrDefault(len, 0) + 1;
-            
-            // Map에 다시 업데이트
-            countByLen.put(len, c);
-            
-            // 지금까지의 최대 그룹 크기 갱신
-            if (c > max) {
-                max = c;
-            }
+        // 문자열 길이가 1~30까지 가능하므로 카운트 배열을 준비
+        int[] lengArr = new int[31];
+
+        // 각 문자열의 길이를 인덱스로 하여 개수 증가
+        for (int i = 0; i < strArr.length; i++) {
+            lengArr[strArr[i].length()]++;
         }
 
-        // 가장 많은 그룹의 크기 반환
-        return max;
+        // 가장 큰 그룹의 크기 찾기
+        for (int i = 0; i <= 30; i++) {
+            answer = Math.max(answer, lengArr[i]);
+        }
+
+        return answer;
     }
 }
