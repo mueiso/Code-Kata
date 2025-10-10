@@ -1,13 +1,13 @@
 import java.util.*;
+import java.util.stream.*;
 
 class Solution {
     
     public int[] solution(int[] num_list) {
         
-        // 배열 정렬
-        Arrays.sort(num_list);
-
-        // 앞의 5개만 잘라내기
-        return Arrays.copyOf(num_list, 5);
+        return Arrays.stream(num_list)
+                     .sorted()      // 오름차순 정렬
+                     .limit(5)      // 앞에서 5개만 선택
+                     .toArray();    // int[]로 변환
     }
 }
