@@ -1,5 +1,7 @@
 class Solution {
+    
     public long solution(long n) {
+        
         // 제곱근을 구하고, 그 제곱이 n과 같은지 확인
         double sqrt = Math.sqrt(n);
         
