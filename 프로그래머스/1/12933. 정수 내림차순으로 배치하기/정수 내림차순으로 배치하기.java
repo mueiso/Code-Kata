@@ -2,7 +2,9 @@ import java.util.*;
 import java.util.stream.*;
 
 class Solution {
+    
     public long solution (long n) {
+        
         // n을 문자열로 변환하고 각 자릿수를 List로 변환
         String str = String.valueOf(n);
         
