@@ -1,20 +1,35 @@
-import java.util.*;
-import java.util.stream.*;
+/* [문제풀이]
+ * String.valueOf(n) → 숫자를 문자열로 바꿈
+   → "118372"
+
+ * .toCharArray() → ['1','1','8','3','7','2']
+
+ * Arrays.sort(digits) → 오름차순 정렬
+   → ['1','1','2','3','7','8']
+
+ * new StringBuilder(...).reverse() → 내림차순 변환
+   → "873211"
+
+ * Long.parseLong() → 숫자로 변환
+   → 873211
+ */
+
+import java.util.Arrays;
 
 class Solution {
     
-    public long solution (long n) {
+    public long solution(long n) {
         
-        // n을 문자열로 변환하고 각 자릿수를 List로 변환
-        String str = String.valueOf(n);
-        
-        // 자릿수를 내림차순으로 정렬하고, 다시 숫자로 합치기
-        return Long.parseLong(
-            str.chars()                               // 문자열을 IntStream으로 변환
-                .mapToObj(c -> (char) c)              // char로 변환
-                .sorted(Comparator.reverseOrder())    // 내림차순으로 정렬
-                .map(String::valueOf)                 // String으로 변환
-                .collect(Collectors.joining())        // 하나의 문자열로 합치기
-        );
+        // 1. 숫자를 문자열로 변환 후 문자 배열로 변환
+        char[] digits = String.valueOf(n).toCharArray();
+
+        // 2. 오름차순 정렬
+        Arrays.sort(digits);
+
+        // 3. 내림차순으로 뒤집기 (StringBuilder.reverse() 사용)
+        String reversed = new StringBuilder(new String(digits)).reverse().toString();
+
+        // 4. 다시 long 타입으로 변환 후 반환
+        return Long.parseLong(reversed);
     }
 }
