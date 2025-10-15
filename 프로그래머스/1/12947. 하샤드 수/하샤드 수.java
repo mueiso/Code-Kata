@@ -1,5 +1,7 @@
 class Solution {
+    
     public boolean solution(int x) {
+        
         int sum = 0;
         int originalX = x; // x 값을 보존하기 위해 원본 값을 저장
 
