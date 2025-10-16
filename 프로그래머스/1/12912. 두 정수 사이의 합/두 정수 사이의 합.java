@@ -1,24 +1,15 @@
 class Solution {
-    
+
     public long solution(int a, int b) {
         
-        long answer = 0;
-        
-        // a가 더 크면 두 값을 바꿔서 항상 a <= b가 되도록
-        if (a > b) {
-            int tempValue = a;
-            a = b;
-            b = tempValue;
-        }
-        
-        for (int i = a; i <= b; i++) {
-            answer += i;
-            
-            if (a == b) {
-            return a;
-        }
+        // a, b 중 작은 값이 시작점, 큰 값이 끝점이 되도록 설정
+        return sumAtoB(Math.min(a, b), Math.max(b, a));
     }
 
-        return answer;
+    private long sumAtoB(long a, long b) {
+        
+        // 가우스의 합 공식: (항의 개수) × (첫항 + 끝항) ÷ 2
+        // 항의 개수 = (b - a + 1)
+        return (b - a + 1) * (a + b) / 2;
     }
 }
