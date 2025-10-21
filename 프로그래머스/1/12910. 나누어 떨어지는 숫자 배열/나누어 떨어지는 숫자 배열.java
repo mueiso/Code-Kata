@@ -1,7 +1,9 @@
 import java.util.Arrays;
 
 class Solution {
+    
     public int[] solution(int[] arr, int divisor) {
+        
         // divisor로 나누어 떨어지는 값을 담을 ArrayList
         int[] answer = Arrays.stream(arr)
                                  .filter(x -> x % divisor == 0) // divisor로 나누어 떨어지는 값만 필터링
@@ -14,6 +16,7 @@ class Solution {
         
         // 나누어 떨어지는 값을 오름차순으로 정렬하여 반환 (sort 메서드)
         Arrays.sort(answer);
+        
         return answer;
     }
 }
