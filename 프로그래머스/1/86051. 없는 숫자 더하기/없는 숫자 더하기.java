@@ -1,10 +1,13 @@
 public class Solution {
+    
     public int solution(int[] numbers) {
+        
         // 0부터 9까지의 숫자 합
         int totalSum = 45;
         
         // numbers 배열의 모든 숫자를 더한 값
         int sumOfNumbers = 0;
+        
         for (int num : numbers) {
             sumOfNumbers += num;
         }
