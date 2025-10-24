@@ -1,18 +1,17 @@
-public class Solution {
+class Solution {
     
     public int solution(int[] numbers) {
         
-        // 0부터 9까지의 숫자 합
-        int totalSum = 45;
-        
-        // numbers 배열의 모든 숫자를 더한 값
-        int sumOfNumbers = 0;
-        
-        for (int num : numbers) {
-            sumOfNumbers += num;
+        // 0~9의 합 = 45
+        int sum = 45;
+
+        // numbers 배열의 숫자들을 하나씩 빼서
+        // 없는 숫자의 합만 남기기
+        for (int i : numbers) {
+            sum -= i;
         }
-        
-        // 0부터 9까지의 숫자 합에서 numbers 배열의 합을 빼면 구할 수 있다
-        return totalSum - sumOfNumbers;
+
+        // 최종적으로 남은 합 = 없는 숫자들의 합
+        return sum;
     }
 }
