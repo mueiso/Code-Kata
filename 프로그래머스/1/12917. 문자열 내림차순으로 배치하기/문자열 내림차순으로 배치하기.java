@@ -1,9 +1,12 @@
 import java.util.*;
 
 class Solution {
+    
     public String solution(String s) {
+        
         // 문자열을 문자 배열로 변환
         Character[] charArray = new Character[s.length()];
+        
         for (int i = 0; i < s.length(); i++) {
             charArray[i] = s.charAt(i);
         }
@@ -13,6 +16,7 @@ class Solution {
         
         // 정렬된 문자 배열을 문자열로 변환
         StringBuilder sb = new StringBuilder();
+        
         for (char c : charArray) {
             sb.append(c);
         }
