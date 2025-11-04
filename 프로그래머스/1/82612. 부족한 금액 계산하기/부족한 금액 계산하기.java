@@ -1,5 +1,7 @@
 class Solution {
+    
     public long solution(int price, int money, int count) {
+        
         // 등차수열의 합 공식 사용
         long totalCost = (long) price * count * (count + 1) / 2;
         
