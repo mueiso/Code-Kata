@@ -1,5 +1,7 @@
 class Solution {
+    
     public int[][] solution(int[][] arr1, int[][] arr2) {
+        
         int rows = arr1.length;        // 행의 개수
         int cols = arr1[0].length;     // 열의 개수
         int[][] result = new int[rows][cols]; // 결과 행렬 생성
