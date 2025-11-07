@@ -1,21 +1,19 @@
 import java.util.*;
+import java.util.stream.*;
 
 class Solution {
     
     public int[] solution(int[] arr, int[] delete_list) {
+    
         
-        Set<Integer> deleteSet = new HashSet<>();
-        for (int d : delete_list) {
-            deleteSet.add(d);
-        }
+        // 삭제해야 할 숫자들을 HashSet에 저장 (탐색 시간 단축)
+        Set<Integer> deleteSet = Arrays.stream(delete_list)
+                                       .boxed()
+                                       .collect(Collectors.toSet());
 
-        List<Integer> list = new ArrayList<>();
-        for (int num : arr) {
-            if (!deleteSet.contains(num)) {
-                list.add(num);
-            }
-        }
-
-        return list.stream().mapToInt(i -> i).toArray();
+        // arr에서 deleteSet에 없는 값만 남김
+        return Arrays.stream(arr)
+                     .filter(num -> !deleteSet.contains(num))
+                     .toArray();
     }
 }
