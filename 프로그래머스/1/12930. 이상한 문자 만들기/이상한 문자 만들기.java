@@ -1,5 +1,7 @@
 public class Solution {
+    
     public String solution(String s) {
+        
         StringBuilder answer = new StringBuilder();
         String[] words = s.split(" ", -1); // 공백 유지
         
