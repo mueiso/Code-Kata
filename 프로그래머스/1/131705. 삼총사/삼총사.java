@@ -1,5 +1,7 @@
 class Solution {
+    
     public int solution(int[] number) {
+        
         int count = 0;
         int 총길이 = number.length; // 배열 길이를 미리 저장해 반복문 내 계산을 줄임
 
