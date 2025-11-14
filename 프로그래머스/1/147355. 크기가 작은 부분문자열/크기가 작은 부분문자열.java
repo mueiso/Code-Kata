@@ -1,5 +1,7 @@
 public class Solution {
+    
     public int solution(String t, String p) {
+        
         int count = 0;
         int pLength = p.length();
         long pNum = Long.parseLong(p); // p를 long으로 변환
