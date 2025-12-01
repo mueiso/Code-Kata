@@ -2,7 +2,9 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 class Solution {
+    
     public String solution(int a, int b) {
+        
         // 2016년 a월 b일 날짜 생성
         LocalDate date = LocalDate.of(2016, a, b);
         
