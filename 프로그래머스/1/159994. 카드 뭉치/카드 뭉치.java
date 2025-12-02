@@ -1,7 +1,9 @@
 import java.util.*;
 
 class Solution {
+    
     public String solution(String[] cards1, String[] cards2, String[] goal) {
+        
         int index1 = 0;
         int index2 = 0;
 
