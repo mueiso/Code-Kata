@@ -1,7 +1,9 @@
 import java.util.*;
 
 class Solution {
+    
     public int solution(int k, int m, int[] score) {
+        
         Arrays.sort(score); // 오름차순 정렬
         int n = score.length;
         int profit = 0;
