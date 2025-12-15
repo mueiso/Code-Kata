@@ -1,35 +1,34 @@
-import java.util.*;
+import java.util.Arrays;
 
 class Solution {
     
     public int solution(int n, int[] lost, int[] reserve) {
         
-        // 1) 기본 상태: 모두 1벌
-        int[] clothes = new int[n + 1];
-        Arrays.fill(clothes, 1);
+        int[] uniform = new int[n + 1]; // 1..n
+        Arrays.fill(uniform, 1);
 
-        // 2) 도난/여벌 반영
-        for (int x : lost) clothes[x]--;
-        for (int x : reserve) clothes[x]++;
+        for (int s : lost) uniform[s]--;
+        for (int s : reserve) uniform[s]++;
 
-        // 3) 빌려주기: 앞번호 -> 뒷번호 순으로 처리(그리디)
-        for (int i = 1; i <= n; i++) {
-            if (clothes[i] == 0) {
-                if (i - 1 >= 1 && clothes[i - 1] == 2) {
-                    clothes[i - 1]--;
-                    clothes[i]++;
-                } else if (i + 1 <= n && clothes[i + 1] == 2) {
-                    clothes[i + 1]--;
-                    clothes[i]++;
-                }
+        for (int s = 1; s <= n; s++) {
+            if (uniform[s] != 0) continue;
+
+            // 왼쪽 학생이 여벌이 있으면 먼저 빌림(그리디)
+            if (s > 1 && uniform[s - 1] == 2) {
+                uniform[s - 1]--;
+                uniform[s]++;
+            }
+            // 아니면 오른쪽 학생에게 빌림
+            else if (s < n && uniform[s + 1] == 2) {
+                uniform[s + 1]--;
+                uniform[s]++;
             }
         }
 
-        // 4) 수업 가능 인원 카운트
-        int answer = 0;
-        for (int i = 1; i <= n; i++) {
-            if (clothes[i] >= 1) answer++;
+        int attendable = 0;
+        for (int s = 1; s <= n; s++) {
+            if (uniform[s] >= 1) attendable++;
         }
-        return answer;
+        return attendable;
     }
 }
