@@ -4,35 +4,32 @@ class Solution {
         
         int[][] answer = new int[n][n];
 
-        int num = 1;
-        int top = 0, bottom = n - 1;
-        int left = 0, right = n - 1;
+        int num = 1;        // 1부터 채울 숫자
+        int start = 0;      // 현재 레이어의 시작 인덱스
+        int end = n;        // 현재 레이어의 끝 인덱스(미포함)
 
+        // 모든 칸이 채워질 때까지 반복
         while (num <= n * n) {
 
-            // → 오른쪽
-            for (int j = left; j <= right; j++) {
-                answer[top][j] = num++;
-            }
-            top++;
+            // → 위쪽 가로 채우기
+            for (int j = start; j < end; j++)
+                answer[start][j] = num++;
 
-            // ↓ 아래
-            for (int i = top; i <= bottom; i++) {
-                answer[i][right] = num++;
-            }
-            right--;
+            // ↓ 오른쪽 세로 채우기
+            for (int i = start + 1; i < end; i++)
+                answer[i][end - 1] = num++;
 
-            // ← 왼쪽
-            for (int j = right; j >= left; j--) {
-                answer[bottom][j] = num++;
-            }
-            bottom--;
+            // ← 아래쪽 가로 채우기
+            for (int j = end - 2; j >= start; j--)
+                answer[end - 1][j] = num++;
 
-            // ↑ 위
-            for (int i = bottom; i >= top; i--) {
-                answer[i][left] = num++;
-            }
-            left++;
+            // ↑ 왼쪽 세로 채우기
+            for (int i = end - 2; i > start; i--)
+                answer[i][start] = num++;
+
+            // 다음 안쪽 레이어로 이동
+            start++;
+            end--;
         }
 
         return answer;
