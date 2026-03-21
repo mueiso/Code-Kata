@@ -4,56 +4,42 @@ class Solution {
         
         long answer = 0;
         
-        int[] count = new int[1001];
-        
-        // 개수 세기
+        long[] arr = new long[1001];
+
+        // 1. 몸무게 개수 카운팅
         for (int w : weights) {
-            
-            count[w]++;
+            arr[w]++;
         }
-        
-        // 1:1 (같은 무게)
+
+        // 2. 모든 몸무게에 대해 계산
         for (int i = 100; i <= 1000; i++) {
-            
-            if (count[i] > 1) {
-                answer += (long) count[i] * (count[i] - 1) / 2;
-            }
-        }
-        
-        // 2:3
-        for (int i = 100; i <= 1000; i++) {
-            
-            if (i * 3 <= 1000 * 2 && (i * 3) % 2 == 0) {
-                int target = i * 3 / 2;
-                
+            if (arr[i] == 0) continue;
+
+            // 1:1 (같은 무게)
+            answer += (arr[i] * (arr[i] - 1)) / 2;
+
+            // 4:3 (i : target = 3 : 4)
+            if (i % 3 == 0) {
+                int target = (4 * i) / 3;
                 if (target <= 1000) {
-                    answer += (long) count[i] * count[target];
+                    answer += arr[i] * arr[target];
                 }
             }
-        }
-        
-        // 2:4 (== 1:2)
-        for (int i = 100; i <= 1000; i++) {
-            
-            int target = i * 2;
-            
-            if (target <= 1000) {
-                answer += (long) count[i] * count[target];
-            }
-        }
-        
-        // 3:4
-        for (int i = 100; i <= 1000; i++) {
-            
-            if ((i * 4) % 3 == 0) {
-                int target = i * 4 / 3;
-                
+
+            // 3:2 (i : target = 2 : 3)
+            if (i % 2 == 0) {
+                int target = (3 * i) / 2;
                 if (target <= 1000) {
-                    answer += (long) count[i] * count[target];
+                    answer += arr[i] * arr[target];
                 }
             }
+
+            // 2:1 (i : target = 1 : 2)
+            if (2 * i <= 1000) {
+                answer += arr[i] * arr[2 * i];
+            }
         }
-        
+
         return answer;
     }
 }
