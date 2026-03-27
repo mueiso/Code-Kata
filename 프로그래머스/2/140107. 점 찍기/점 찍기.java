@@ -1,3 +1,5 @@
+/* x를 하나 고정하면 가능한 y의 개수를 구할 수 있다 */
+
 class Solution {
     
     public long solution(int k, int d) {
