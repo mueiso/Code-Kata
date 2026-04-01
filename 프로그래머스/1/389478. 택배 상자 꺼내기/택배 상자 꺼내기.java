@@ -1,41 +1,28 @@
 /*
- * 짝수층(0,2,4...) → 왼 → 오른쪽
- * 홀수층(1,3,5...) → 오 → 왼쪽
- * 즉, 행(row)에 따라 열(col)이 뒤집힘
+   지그재그 구조에서 같은 cloumn으로 올라가려면
+   끝까지 갔다가 방향 바뀌어서 같은 column으로 오는 거리 = (끝까지 거리 × 2) + 1
  */
 
 class Solution {
     
     public int solution(int n, int w, int num) {
 
-        // 1. num의 위치 구하기
-        int targetRow = (num - 1) / w;
-        int targetCol = (num - 1) % w;
+        int cnt = 0;
 
-        // 홀수 행이면 방향 반전
-        if (targetRow % 2 == 1) {
-            targetCol = w - 1 - targetCol;
+        // num이 존재하는 동안 계속 위로 점프
+        while (num <= n) {
+
+            /* [현재 위치에서 같은 column의 위 박스로 이동하는 거리 계산]
+               (num - 1) % w ➡️ 현재 row에서의 기본 위치 (왼→오 기준 col)
+               w - ((num-1) % w) - 1 ➡️ 현재 위치에서 반대쪽 끝까지 거리
+               * 2 + 1 ➡️ 한 층 올라갈 때 필요한 이동 거리
+             */
+            int step = (w - ((num - 1) % w) - 1) * 2 + 1;
+
+            num += step; // 다음 층으로 이동
+            cnt++;       // 꺼내야 하는 박스 수 증가
         }
 
-        int answer = 1; // 자기 자신 포함
-
-        // 2. num보다 위에 있는 박스들 확인
-        for (int i = num + 1; i <= n; i++) {
-
-            int row = (i - 1) / w;
-            int col = (i - 1) % w;
-
-            // 홀수 행이면 방향 반전
-            if (row % 2 == 1) {
-                col = w - 1 - col;
-            }
-
-            // 같은 column이면 위에 쌓인 박스
-            if (col == targetCol) {
-                answer++;
-            }
-        }
-
-        return answer;
+        return cnt;
     }
 }
