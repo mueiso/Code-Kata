@@ -1,4 +1,5 @@
 class Solution {
+    
     public int solution(int[] money) {
         
         int n = money.length;
@@ -20,6 +21,7 @@ class Solution {
         return Math.max(case1, case2);
     }
 
+    /* 특정 범위(start ~ end) 내에서 인접한 집을 털지 않고 훔칠 수 있는 돈의 최댓값을 구하는 메서드 */
     private int robRange(int[] money, int start, int end) {
         
         int prev2 = 0; // dp[i-2]
