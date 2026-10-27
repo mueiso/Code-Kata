@@ -25,6 +25,7 @@ class Solution {
         return Math.min(dp[1][0], dp[1][1]);
     }
 
+    //=* 후위 순회를 통해 각 직원이 워크숍에 참석하거나 참석하지 않을 때의 최소 매출 손실 비용을 계산하는 DFS 메서드 */
     private void dfs(int curr) {
         
         dp[curr][0] = 0;
