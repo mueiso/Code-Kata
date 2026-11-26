@@ -3,8 +3,10 @@ import java.util.*;
 class Solution {
     
     int[] parent, size;
-    int[] time, setOf, prv, nxt;     // 그룹 대표(루트) 기준
-    int[] head, tail;                // 집합 기준
+    // 그룹 대표(루트) 기준
+    int[] time, setOf, prv, nxt;
+    // 집합 기준
+    int[] head, tail;
 
     int find(int x) {
         int r = x;
@@ -14,7 +16,8 @@ class Solution {
         return r;
     }
 
-    int union(int a, int b) {        // 두 루트를 합치고 새 루트 반환
+    // 두 루트를 합치고 새 루트 반환
+    int union(int a, int b) {
         if (size[a] < size[b]) { int t = a; a = b; b = t; }
         parent[b] = a;
         size[a] += size[b];
@@ -40,7 +43,8 @@ class Solution {
 
         for (int qi = 0; qi < q; qi++) {
             int type = queries[qi][0], x = queries[qi][1], y = queries[qi][2];
-            int now = qi + 1;                       // 몇 번째 쿼리인지
+            // 몇 번째 쿼리인지
+            int now = qi + 1;
             int rx = find(x), ry = find(y);
 
             if (type == 1) {
